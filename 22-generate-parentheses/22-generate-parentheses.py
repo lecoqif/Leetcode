@@ -8,12 +8,13 @@ class Solution:
             
             if left < n:
                 curr.append('(')
-                generate(left + 1, right, curr[:])
+                generate(left + 1, right, curr)
                 curr.pop()
             
             if right < left:
                 curr.append(')')
-                generate(left, right + 1, curr[:])
+                generate(left, right + 1, curr)
+                curr.pop()
                 
         
         ret = []
