@@ -23,10 +23,10 @@ class Solution:
             if node.right is None and node.left is None and val == targetSum:
                 return True
             
-            if node.left is not None:
+            if node.left:
                 q.append((node.left, val))
             
-            if node.right is not None:
+            if node.right:
                 q.append((node.right, val))
         
         return False
