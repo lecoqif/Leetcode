@@ -8,8 +8,6 @@ class Solution:
         if head is None:
             return None
         
-        
-        
         curr = head
         
         def find_length(node):
@@ -37,7 +35,6 @@ class Solution:
                 
                 node = node.next
             
-            
         curr = head
         break_node = find_node(length - k, curr)
         curr = head
@@ -45,5 +42,6 @@ class Solution:
         new_head = break_node.next
         break_node.next = None
         last_node.next = head
+        
         return new_head
         
