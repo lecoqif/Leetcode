@@ -19,7 +19,10 @@ class Solution:
         
         while len(q) > 0:
             node, depth = q.popleft()
-            ret = max(ret, depth)
+            
+            if not node.right and not node.left:
+                ret = max(ret, depth)
+                continue
             
             if node.right:
                 q.append((node.right, depth + 1))
