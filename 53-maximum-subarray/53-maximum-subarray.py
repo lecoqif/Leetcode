@@ -3,8 +3,7 @@ class Solution:
         max_now = max_total = nums[0]
         
         for i in range(1, len(nums)):
-            val = nums[i]
-            max_now = max(max_now + val, val)
+            max_now = max(max_now + nums[i], nums[i])
             max_total = max(max_total, max_now)
             
         return max_total
