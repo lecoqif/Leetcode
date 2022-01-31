@@ -6,10 +6,6 @@ class Solution:
         
         ROWS, COLS = len(matrix), len(matrix[0])
         
-        # [2][2] = [0][2] and [2][1] = [1][2]
-        # 0, 0 and 0, 1
-        # [1][1] - [2][1]
-        
         for row in range(ROWS // 2):
             for col in range(row, ROWS - 1 - row):
                 temp = matrix[row][col]
