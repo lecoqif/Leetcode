@@ -23,13 +23,12 @@ class Solution:
         
         self.board[row][col] = '#'
         
-        ret = False
-        
         for way in ranges:
-            ret |= self.dfs(row + way[0], col + way[1], idx + 1)
+            if self.dfs(row + way[0], col + way[1], idx + 1):
+                return True
         
         self.board[row][col] = self.word[idx]
         
-        return ret
+        return False
                     
         
