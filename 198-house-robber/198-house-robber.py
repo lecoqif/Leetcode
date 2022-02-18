@@ -3,9 +3,7 @@ class Solution:
         
         n = len(nums)
         
-        if n == 1: return nums[0]
-        
-        if n == 2: return max(nums)
+        if n <= 2: return max(nums)
         
         dp = [0 for _ in range(n)]
         
