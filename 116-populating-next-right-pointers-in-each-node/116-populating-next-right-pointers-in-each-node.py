@@ -7,35 +7,33 @@ class Node:
         self.right = right
         self.next = next
 """
+from collections import defaultdict
 
 class Solution:
-    def connect(self, root: 'Node') -> 'Node':
-        q = []
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
         
         if not root:
             return root
         
-        q.append(root)
+        levels = defaultdict(list)
         
-        while (len(q) != 0):
-            size = len(q)
+        q = deque([(0, root)])
+        
+        while len(q) > 0:
+            curr_len = len(q)
             
-            for i in range(size):
+            for i in range(curr_len):
+                depth, node = q.popleft()
                 
-                node = q.pop(0)
+                levels[depth].append(node)
                 
-                if i < size - 1:
-                    node.next = q[0]
+                for leaf in [node.left, node.right]:
+                    if leaf:
+                        q.append((depth + 1, leaf))
                 
-                if node.left:
-                    q.append(node.left)
-                
-                if node.right:
-                    q.append(node.right)
+        for level in levels:
+            for i, node in enumerate(levels[level]):
+                if i < len(levels[level]) - 1:
+                    node.next = levels[level][i + 1]
         
         return root
-            
-            
-            
-            
-        
