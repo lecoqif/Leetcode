@@ -17,8 +17,7 @@ class Solution:
         while max_key > 0:
             while len(fdict[max_key]) > 1:
                 curr = fdict[max_key].pop()
-                if max_key > 1:
-                    fdict[max_key - 1].append(curr)
+                fdict[max_key - 1].append(curr)
                 ret += 1
                 
             max_key -= 1
