@@ -6,17 +6,13 @@ class Solution:
         
         for point in points:
             dist = self.euclideanDistance(point)
-            heappush(heap, (dist, point))
+            heappush(heap, (-dist, point))
+            if len(heap) > K:
+                heappop(heap)
         
-        ret = []
-        
-        for i in range(K):
-            dist, val = heappop(heap)
-            ret.append(val)
+        ret = list(map(lambda x:x[1], heap))
         
         return ret
-        
-        
         
     def euclideanDistance(self, point: List[int]) -> float:
         dist = (point[0]) ** 2 + (point[1]) ** 2
