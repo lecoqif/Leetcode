@@ -4,22 +4,20 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
-
+from collections import deque
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         parents = {root: None}
         
-        st = [root]
+        st = deque([root])
         
         while(len(st) != 0):
-            node = st.pop(0)
-            if node.left:
-                parents[node.left] = node
-                st.append(node.left)
+            node = st.popleft()
             
-            if node.right:
-                parents[node.right] = node
-                st.append(node.right)
+            for leaf in [node.left, node.right]:
+                if leaf:
+                    parents[leaf] = node
+                    st.append(leaf)
         
         ps = set()
         
