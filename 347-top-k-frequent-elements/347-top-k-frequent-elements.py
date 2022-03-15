@@ -2,7 +2,10 @@ from collections import defaultdict, Counter
 from heapq import heappush, heappop
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        hm = Counter(nums)
+        hm = defaultdict(int)
+        
+        for num in nums:
+            hm[num] += 1
         
         heap = []
         
