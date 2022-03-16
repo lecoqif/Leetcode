@@ -1,10 +1,12 @@
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
-        nums.sort()
+        seen = set()
         
-        for i, val in enumerate(nums[1:]):
-            if val == nums[i]:
-                return val
+        for i in nums:
+            if i in seen:
+                return i
+            
+            seen.add(i)
         
-        return -1
+        
             
