@@ -1,6 +1,10 @@
+from collections import defaultdict
 class Solution:
     def frequencySort(self, s: str) -> str:
-        char_counts = Counter(s)
+        char_counts = defaultdict(int)
+        
+        for char in s:
+            char_counts[char] += 1
         
         max_freq = 0
         
