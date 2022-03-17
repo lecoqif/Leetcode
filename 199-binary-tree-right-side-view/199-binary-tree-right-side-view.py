@@ -12,24 +12,25 @@ class Solution:
         if not root:
             return []
         
-        levels = []
+        q = deque()
         
-        q = deque([(root, 0)])
+        q.append(root)
+        
+        rightside = []
         
         while len(q) > 0:
-            node, depth = q.popleft()
+            size = len(q)
             
-            if len(levels) == depth:
-                levels.append([])
+            for i in range(size):
+                node = q.popleft()
                 
-            levels[depth].append(node.val)
-            
-            for leaf in [node.left, node.right]:
-                if leaf:
-                    q.append((leaf, depth + 1))
+                if i == size - 1:
+                    rightside.append(node.val)
+                
+                for leaf in [node.left, node.right]:
+                    if leaf:
+                        q.append(leaf)
         
-        ret = [level[-1] for level in levels]
-        
-        return ret
+        return rightside
         
         
