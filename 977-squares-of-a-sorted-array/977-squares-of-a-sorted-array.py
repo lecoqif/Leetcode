@@ -13,7 +13,7 @@ class Solution:
                 ret.appendleft(nums[right] ** 2)
                 right -= 1
         
-        return list(ret)
+        return ret
             
             
                 
