@@ -1,7 +1,7 @@
 class NumArray:
 
     def __init__(self, nums: List[int]):
-        self.hm = {}
+        self.sums = []
         self.nums = nums
         self.populate_map()
     
@@ -10,13 +10,13 @@ class NumArray:
         
         for i in range(len(self.nums)):
             curr += self.nums[i]
-            self.hm[i] = curr
+            self.sums.append(curr)
         
     def sumRange(self, left: int, right: int) -> int:
         if left == 0:
-            return self.hm[right]
+            return self.sums[right]
         
-        return self.hm[right] - self.hm[left - 1]
+        return self.sums[right] - self.sums[left - 1]
         
 
 
