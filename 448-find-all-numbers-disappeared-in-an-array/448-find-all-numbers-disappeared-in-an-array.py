@@ -4,10 +4,12 @@ class Solution:
         
         n = len(nums)
         
-        seen = set([i for i in range(1, n + 1)])
+        for i in range(n):
+            if nums[abs(nums[i]) - 1] > 0:
+                nums[abs(nums[i]) - 1] = -1 * nums[abs(nums[i]) - 1]
         
-        for i in nums:
-            if i in seen:
-                seen.remove(i)
+        for i in range(n):
+            if nums[i] > 0:
+                ret.append(i + 1)
         
-        return list(seen)
+        return ret
