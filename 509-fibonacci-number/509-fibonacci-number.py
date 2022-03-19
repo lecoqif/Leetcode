@@ -4,12 +4,10 @@ class Solution:
         
         if n == 1: return 1
         
-        a, b = 0, 1
+        fib = [0, 1]
         
         for i in range(2, n + 1):
-            c = a + b
-            a = b
-            b = c
+            fib.append(fib[i - 1] + fib[i - 2])
             
-        return c
+        return fib[n]
             
