@@ -4,33 +4,36 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+from hashlib import sha256
 class Solution:
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-        if not (root and subRoot):
-            return root is subRoot
         
-        q = deque()
+        def hash_(x):
+            S = sha256()
+            x = x.encode("utf-8")
+            S.update(x)
+            return S.hexdigest()
         
-        q.append(root)
-        
-        while len(q) > 0:
-            node = q.popleft()
+        def merkle(node):
+            if not node:
+                return "#"
             
-            if node.val == subRoot.val and self.check(node, subRoot):
-                return True
+            l = merkle(node.left)
+            r = merkle(node.right)
+            node.merkle = hash_(l + str(node.val) + r)
+            return node.merkle
+        
+        merkle(root)
+        merkle(subRoot)
+        
+        def dfs(node):
+            if not node:
+                return False
             
-            for leaf in [node.left, node.right]:
-                if leaf:
-                    q.append(leaf)
+            return node.merkle == subRoot.merkle or dfs(node.left) or dfs(node.right)
         
-        return False
-    
-    def check(self, node, subRoot):
-        if not (node and subRoot):
-            return node is subRoot
+        return dfs(root)
         
-        if node.val != subRoot.val:
-            return False
         
-        return self.check(node.left, subRoot.left) and self.check(node.right, subRoot.right)
+            
             
