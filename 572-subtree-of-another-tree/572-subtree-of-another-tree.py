@@ -6,11 +6,8 @@
 #         self.right = right
 class Solution:
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-        if not root and not subRoot:
-            return True
-        
-        if root and not subRoot or not root and subRoot:
-            return False
+        if not (root and subRoot):
+            return root is subRoot
         
         q = deque()
         
@@ -29,11 +26,8 @@ class Solution:
         return False
     
     def check(self, node, subRoot):
-        if not node and not subRoot:
-            return True
-        
-        if node and not subRoot or not node and subRoot:
-            return False
+        if not (node and subRoot):
+            return node is subRoot
         
         if node.val != subRoot.val:
             return False
