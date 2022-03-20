@@ -22,5 +22,5 @@ class Solution:
                 x2 = x1
                 x1 = gold1(start, end)
         
-        return A.index(max(A[start:end + 1]), start)
+        return A.index(max(A[start:end + 1]))
            
