@@ -59,7 +59,7 @@ class Solution:
         
         self.ret =[]
             
-        any(self.trie.insert(word) for word in words)
+        list(self.trie.insert(word) for word in words)
         
         for word in words:
             output = [list('.' * self.n) for _ in range(self.n)]
