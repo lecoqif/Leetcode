@@ -1,26 +1,27 @@
 from collections import defaultdict
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        tCharCount = Counter(t)
+        charCount = [0 for _ in range(128)]
+        
+        for ch in t:
+            charCount[ord(ch)] += 1
         
         left = right = 0
         
         n = len(s)
-        
-        sCharCount = defaultdict(int)
         
         ret = float('inf')
         retVal = ""
         
         while right < n:
             
-            sCharCount[s[right]] += 1
+            charCount[ord(s[right])] -= 1
             
-            while self.check(sCharCount, tCharCount):
+            while self.check(charCount):
                 if right - left + 1 < ret:
                     ret = right - left + 1
                     retVal = s[left:right + 1]
-                sCharCount[s[left]] -= 1
+                charCount[ord(s[left])] += 1
                 left += 1
                 
             
@@ -29,9 +30,9 @@ class Solution:
         
         return retVal
     
-    def check(self, sDict, tDict):
-        for key in tDict:
-            if sDict[key] < tDict[key]:
+    def check(self, countArr):
+        for num in countArr:
+            if num > 0:
                 return False
         
         return True
