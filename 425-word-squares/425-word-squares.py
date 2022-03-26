@@ -62,12 +62,7 @@ class Solution:
         list(self.trie.insert(word) for word in words)
         
         for word in words:
-            output = [list('.' * self.n) for _ in range(self.n)]
-            
-            for i in range(len(word)):
-                output[i][0] = word[i]
-            
-            output[0] = list(word)
+            output = [word]
 
             self.backtrack(output, 1)
         
@@ -78,20 +73,14 @@ class Solution:
             self.ret.append(list(map(lambda x:"".join(x), output)))
             return
         
-        for word in self.trie.startsWith(output[idx][:idx]):
-            temp = self.trie.startsWith(output[idx][:idx])
-            output[idx] = list(word)
-            
-            for i in range(idx, len(word)):
-                output[i][idx] = word[i]
+        for word in self.trie.startsWith(''.join(x[idx] for x in output)):
+
+            output.append(word)
             
             self.backtrack(output, idx + 1)
             
-            output[idx][idx:] = list("." * (self.n - idx))
-            
-            for i in range(idx, len(word)):
-                output[i][idx] = "."
-            
+            output.pop()
+        
             
         
         
