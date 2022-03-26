@@ -55,9 +55,7 @@ class Solution:
         
         self.n = len(words[0])
         
-        self.words = words
-        
-        self.ret =[]
+        self.ret = []
             
         list(self.trie.insert(word) for word in words)
         
