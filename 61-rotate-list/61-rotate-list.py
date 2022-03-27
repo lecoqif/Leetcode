@@ -5,43 +5,46 @@
 #         self.next = next
 class Solution:
     def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
-        if head is None:
-            return None
         
-        curr = head
-        
-        def find_length(node):
-            ret = 0
-            while node is not None:
-                ret += 1
-                node = node.next
-            
-            return ret
-                
-        length = find_length(curr)
-        
-        
-        k = k % length
-        
-        if k == 0 or length == 1:
+        if not head:
             return head
         
-        def find_node(index, node):
-            curr = 0
-            while True:
-                curr += 1
-                if curr == index:
-                    return node
-                
-                node = node.next
+        curr, last = head, None
+        
+        listLength = 0
+        
+        while curr:
+            listLength += 1
             
-        curr = head
-        break_node = find_node(length - k, curr)
-        curr = head
-        last_node = find_node(length, curr)
-        new_head = break_node.next
-        break_node.next = None
-        last_node.next = head
+            if not curr.next:
+                last = curr
+            
+            curr = curr.next
+            
+        k = k % listLength
         
-        return new_head
+        if k == 0: return head
         
+        detachNodeIndex = listLength - k
+        
+        i = 1
+        
+        curr = head
+        
+        newHead = None
+        
+        while curr:
+            if i == detachNodeIndex:
+                newHead = curr.next
+                curr.next = None
+                break
+            
+            curr = curr.next
+            
+            i += 1
+        
+        last.next = head
+        
+        return newHead
+            
+                
