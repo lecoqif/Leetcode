@@ -1,11 +1,11 @@
 class Solution:
     def findMissingRanges(self, nums: List[int], lower: int, upper: int) -> List[str]:
-        if len(nums) == 0:
-            if upper - lower == 0:
-                return [str(lower)]
+#         if len(nums) == 0:
+#             if upper - lower == 0:
+#                 return [str(lower)]
             
-            else:
-                return [str(lower) + "->" + str(upper)]
+#             else:
+#                 return [str(lower) + "->" + str(upper)]
             
             
         ret = []
