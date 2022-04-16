@@ -3,31 +3,30 @@ class MyStack:
     def __init__(self):
         self.push_q = []
         self.pop_q = []
+        self.peek = None
         
 
     def push(self, x: int) -> None:
         self.push_q.append(x)
+        self.peek = x
         
-    def transfer(self):
-        temp = []
-        
-        while self.push_q:
-            temp.append(self.push_q.pop(0))
-        
-        for num in temp:
-            self.pop_q.insert(0, num)
 
     def pop(self) -> int:
-        self.transfer()
-        return self.pop_q.pop(0)
+        while len(self.push_q) > 1:
+            val = self.push_q.pop(0)
+            self.pop_q.append(val)
+            self.peek = val
+        
+        ret = self.push_q.pop(0)
+        self.push_q, self.pop_q = self.pop_q, self.push_q
+        return ret
         
     def top(self) -> int:
-        self.transfer()
-        return self.pop_q[0]
+        return self.peek
         
         
     def empty(self) -> bool:
-        return len(self.push_q) == 0 and len(self.pop_q) == 0
+        return len(self.push_q) == 0
         
 
 
