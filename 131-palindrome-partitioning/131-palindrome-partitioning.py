@@ -3,6 +3,7 @@ class Solution:
         
         output = []
         
+        @lru_cache
         def isPalindrome(word: str) -> bool:
             if len(word) == 0: return False
             
