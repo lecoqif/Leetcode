@@ -14,10 +14,8 @@ class FreqStack:
     def pop(self) -> int:
         val = self.stacks[self.maxFreq].pop()
         self.freqDict[val] -= 1
-        
         if len(self.stacks[self.maxFreq]) == 0:
             self.maxFreq -= 1
-        
         return val
         
 
