@@ -3,18 +3,17 @@ class Solution:
         
         wordSet = set(wordDict)
         
-        @lru_cache(maxsize=None)
-        def dfs(word: str) -> bool:
-            if len(word) == 0:
-                return True
-            
-            for i in range(len(word) + 1):
-                if word[0:i] in wordSet and dfs(word[i:]):
-                    return True
-            
-            return False
+        n = len(s)
         
-        return dfs(s)
+        dp = [False] * (n + 1)
+        
+        dp[0] = True
+        
+        for i in range(1, n + 1):
+            for j in range(0, i):
+                dp[i] = dp[i] or (dp[j] and s[j:i] in wordSet)
+        
+        return dp[n]
                     
             
             
