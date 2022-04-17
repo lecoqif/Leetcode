@@ -8,37 +8,26 @@ class Solution:
         if not head or not head.next:
             return head
         
+        odd, even = ListNode(0), ListNode(0)
+        
+        oddHead, evenHead = odd, even
+        
         curr = head
         
-        even, odd = ListNode(-1), ListNode(-1)
+        isOdd = True
         
-        preHead, preEven = odd, even
-        
-        i = 1
-        
-        while head:
-            if i % 2 == 1:
-                odd.next = head
+        while curr:
+            if isOdd:
+                odd.next = curr
                 odd = odd.next
             
             else:
-                even.next = head
+                even.next = curr
                 even = even.next
-                
-            i += 1
-            head = head.next
-        
+            
+            isOdd = not isOdd
+            curr = curr.next
+            
         even.next = None
-        odd.next = preEven.next
-        
-        return preHead.next
-        
-        
-                
-        
-        
-        
-        
-        
-        
-        
+        odd.next = evenHead.next
+        return oddHead.next
