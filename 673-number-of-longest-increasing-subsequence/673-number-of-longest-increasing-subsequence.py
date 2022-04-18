@@ -20,7 +20,5 @@ class Solution:
             dp[i] = [maxlen, count]
             
             maxLisLen = max(maxlen, maxLisLen)
-        
-        print(dp)
             
         return sum([item[1] for item in dp if item[0] == maxLisLen])
