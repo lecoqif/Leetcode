@@ -29,7 +29,7 @@ class Bucket:
 class MyHashMap:
 
     def __init__(self):
-        self.key_space = 769
+        self.key_space = 699
         self.hash_map = [Bucket() for _ in range(self.key_space)]
 
     def hash_val(self, key: int) -> int:
