@@ -1,31 +1,48 @@
+class Bucket:
+    def __init__(self):
+        self.nodes = []
+    
+    def insert(self, key: int, val: int):
+        for i, kv in enumerate(self.nodes):
+            if kv[0] == key:
+                self.nodes[i] = (key, val)
+                return
+        
+        self.nodes.append((key, val))
+    
+    def get(self, key: int) -> int:
+        for k, v in self.nodes:
+            if k == key:
+                return v
+        
+        return -1
+    
+    def remove(self, key: int) -> None:
+        for i, kv in enumerate(self.nodes):
+            if kv[0] == key:
+                self.nodes[i] = self.nodes[-1]
+                self.nodes.pop()
+                return
+        
+        
+
 class MyHashMap:
 
     def __init__(self):
-        """
-        Initialize your data structure here.
-        """
-        self.hashMap = [ -1 for _ in range(10 ** 6 + 1) ]
+        self.key_space = 19997
+        self.hash_map = [Bucket() for _ in range(self.key_space)]
 
-    def put(self, key: int, value: int) -> None:
-        """
-        value will always be non-negative.
-        """
-        self.hashMap[key] = value
+    def hash_val(self, key: int) -> int:
+        return key % self.key_space
         
+    def put(self, key: int, value: int) -> None:
+        self.hash_map[self.hash_val(key)].insert(key, value)
 
     def get(self, key: int) -> int:
-        """
-        Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key
-        """
-        return self.hashMap[key]
-        
+        return self.hash_map[self.hash_val(key)].get(key)
 
     def remove(self, key: int) -> None:
-        """
-        Removes the mapping of the specified value key if this map contains a mapping for the key
-        """
-        self.hashMap[key] = -1
-        
+        self.hash_map[self.hash_val(key)].remove(key)
 
 
 # Your MyHashMap object will be instantiated and called as such:
