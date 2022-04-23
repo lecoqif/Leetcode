@@ -1,27 +1,22 @@
 class Solution:
     def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
         
-        n = len(graph)
-        paths = []
-
-        q = deque()
+        target = len(graph) - 1
         
-        q.append((0, []))
-        
-        while q:
-            node, path = q.popleft()
+        @lru_cache(None)
+        def allPathsToTarget(node = 0) -> List[List[int]]:
+            if node == target:
+                return [[node]]
             
-            path.append(node)
-            if node == n - 1:
-                paths.append(path)
-                continue
-            
-            
+            results = [] 
             
             for nei in graph[node]:
-                q.append((nei, path[:]))
+                for path in allPathsToTarget(nei):
+                    results.append([node] + path)
+            
+            return results
         
-        return paths
+        return allPathsToTarget()
             
         
         
