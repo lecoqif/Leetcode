@@ -8,7 +8,7 @@ class Solution:
                 return True
             if n == 0 or subset_sum < 0:
                 return False
-            result = (dfs(nums, n - 1, subset_sum - nums[n - 1])
+            result = (dfs(nums, n - 1, subset_sum - nums[n])
                     or dfs(nums, n - 1, subset_sum))
             return result
 
