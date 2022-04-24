@@ -25,12 +25,11 @@ class Solution:
         
         slow = head
         
-        while True:
-            if fast == slow:
-                return fast
-            
+        while fast != slow:
             slow = slow.next
             fast = fast.next
+        
+        return fast
 
         
         
