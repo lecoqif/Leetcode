@@ -13,8 +13,7 @@ class Solution:
         
         prehead = ListNode(0)
         prehead.next = head
-        slow = head
-        fast = head
+        slow = fast = head
         
         while fast and fast.next:
             fast = fast.next.next
