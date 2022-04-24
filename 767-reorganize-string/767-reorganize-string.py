@@ -1,25 +1,28 @@
-import heapq
+from collections import Counter
+from heapq import heappush, heappop
 class Solution:
-    def reorganizeString(self, S: str) -> str:
-        c = Counter(S)
+    def reorganizeString(self, s: str) -> str:
         
-        pq = [(-value, key) for key, value in c.items()]
+        # Frequency counts
+        counter = Counter(s)
         
-        heapq.heapify(pq)
+        heap = []
         
-        prev_freq, prev_char = 0, ''
+        for letter in counter:
+            heappush(heap, (-counter[letter], letter))
         
-        res = ''
+        ret = ""
         
-        while pq:
-            freq, char = heapq.heappop(pq)
-            res += char
-            freq += 1
+        prev_char, prev_count = '', 0
+        
+        while heap:
+            curr_count, curr_char = heappop(heap)
+            ret += curr_char
             
-            if prev_freq < 0:
-                heapq.heappush(pq, (prev_freq, prev_char))
+            if prev_count < 0:
+                heappush(heap, (prev_count, prev_char))
             
-            prev_freq, prev_char = freq, char
+            prev_char, prev_count = curr_char, curr_count + 1
         
-        return res if len(res) == len(S) else ''
-            
+        return ret if len(ret) == len(s) else ""
+        
