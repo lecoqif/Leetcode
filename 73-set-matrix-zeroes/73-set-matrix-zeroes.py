@@ -3,27 +3,28 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        isCol = False
-        R, C = len(matrix), len(matrix[0])
+        setFirst = False
         
-        for i in range(len(matrix)):
+        ROWS, COLS = len(matrix), len(matrix[0])
+        
+        for i in range(ROWS):
             
             if matrix[i][0] == 0:
-                isCol = True
+                setFirst = True
             
-            for j in range(1, C):
-                if matrix[i][j] == 0:
+            for j in range(1, COLS):
+                if not matrix[i][j]: 
                     matrix[i][0] = 0
                     matrix[0][j] = 0
-        
-        for i in range(1, R):
-            for j in range(1, C):
+            
+        for i in range(1, ROWS):
+            for j in range(1, COLS):
                 if not matrix[i][0] or not matrix[0][j]:
                     matrix[i][j] = 0
-        
+            
         if matrix[0][0] == 0:
-            matrix[0] = [0] * C
+            matrix[0] = [0 for _ in range(COLS)]
         
-        if isCol:
-            for i in range(R):
+        if setFirst:
+            for i in range(ROWS):
                 matrix[i][0] = 0
