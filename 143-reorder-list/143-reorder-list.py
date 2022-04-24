@@ -9,38 +9,49 @@ class Solution:
         Do not return anything, modify head in-place instead.
         """
         
-        stack = []
-        
+        slow = fast = head
         prehead = ListNode(0)
         prehead.next = head
-        slow = fast = head
         
         while fast and fast.next:
+            slow = slow.next
             fast = fast.next.next
             prehead = prehead.next
-            slow = slow.next
             
-        # Odd length linked list
         if fast:
-            prehead = prehead.next
             slow = slow.next
+            prehead = prehead.next
         
         prehead.next = None
         
-        while slow:
-            stack.append(slow)
-            slow = slow.next
+        last = Solution.reverse(slow)
         
         curr = head
         
-        while curr and stack:
+        while curr and last:
             after = curr.next
-            last = stack.pop()
             curr.next = last
+            prevLast = last.next
             last.next = after
             curr = after
-            
+            last = prevLast
+        
         return head
+    
+    @staticmethod
+    def reverse(head: ListNode) -> ListNode:
+        
+        prev = None
+        curr = head
+        
+        while curr:
+            after = curr.next
+            curr.next = prev
+            prev = curr
+            curr = after
+        
+        return prev
+        
         
         
         
