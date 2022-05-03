@@ -9,15 +9,22 @@ class MedianFinder:
     def addNum(self, num: int) -> None:
         heappush(self.maxHeap, (-num, num))
         
-        if self.maxHeap and self.minHeap and self.maxHeap[0][1] > self.minHeap[0][1]:
-            _, val = heappop(self.maxHeap)
-            heappush(self.minHeap, (val, val))
+#         if self.maxHeap and self.minHeap and self.maxHeap[0][1] > self.minHeap[0][1]:
+#             _, val = heappop(self.maxHeap)
+#             heappush(self.minHeap, (val, val))
         
-        if len(self.maxHeap) > (len(self.minHeap) + 1):
-            _, val = heappop(self.maxHeap)
-            heappush(self.minHeap, (val, val))
+#         if len(self.maxHeap) > (len(self.minHeap) + 1):
+#             _, val = heappop(self.maxHeap)
+#             heappush(self.minHeap, (val, val))
         
-        if len(self.minHeap) > (len(self.maxHeap) + 1):
+#         if len(self.minHeap) > (len(self.maxHeap) + 1):
+#             _, val = heappop(self.minHeap)
+#             heappush(self.maxHeap, (-val, val))
+
+        _, val = heappop(self.maxHeap)
+        heappush(self.minHeap, (val, val))
+        
+        if len(self.maxHeap) < len(self.minHeap):
             _, val = heappop(self.minHeap)
             heappush(self.maxHeap, (-val, val))
         
