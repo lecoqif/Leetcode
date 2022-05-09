@@ -18,11 +18,10 @@ class Trie:
             if ch not in curr.children:
                 curr.children[ch] = Node(ch)
                 curr.children[ch].parent = curr
-            
+
             curr = curr.children[ch]
         
         curr.isWord = True
-        
         curr.fullWord = word
         
 class Solution:
@@ -38,8 +37,6 @@ class Solution:
         res = []
         
         def backtrack(row: int, col: int, node: Node) -> None:
-            nonlocal ROWS, COLS
-
             if not (0 <= row < ROWS and 0 <= col < COLS and board[row][col] in node.children):
                 return 
             
