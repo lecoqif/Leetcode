@@ -54,6 +54,9 @@ class Solution:
                     parent = curr.parent
                     parent.children.pop(curr.ch)
                     curr = parent
+                
+                if curr.ch != newNode.ch:
+                    return
             
             board[row][col] = '#'
             
