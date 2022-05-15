@@ -7,6 +7,8 @@ class Solution:
         
         counter = Counter(tasks)
         
+        
+        
         heap = []
         
         for task, count in counter.items():
