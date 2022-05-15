@@ -3,10 +3,12 @@ from heapq import heappush, heappop
 class Solution:
     def leastInterval(self, tasks: List[str], n: int) -> int:
         
-        if n == 0: return len(tasks)
-        
         counter = Counter(tasks)
         
+        maxf = max(counter.values())
+        
+        if n == 0 or maxf == 1: return len(tasks)
+
         
         
         heap = []
