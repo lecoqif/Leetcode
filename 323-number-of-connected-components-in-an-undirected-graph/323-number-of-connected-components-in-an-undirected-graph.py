@@ -1,6 +1,6 @@
-from collections import defaultdict
 class Solution:
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
+        count = 0
         
         graph = defaultdict(list)
         
@@ -8,20 +8,28 @@ class Solution:
             graph[src].append(dst)
             graph[dst].append(src)
         
-        seen = set()
+        visited = set()
         
-        count = 0
+        q = deque(list(range(n)))
         
-        def dfs(vertex: int) -> None:
-            seen.add(vertex)
+        def dfs(node: int) -> None:
             
-            for nei in graph[vertex]:
-                if nei not in seen:
-                    dfs(nei)
+            if node in visited:
+                return
+            
+            visited.add(node)
+            
+            for neighbor in graph[node]:
+                dfs(neighbor)
         
-        for v in range(n):
-            if v not in seen:
-                count += 1
-                dfs(v)
+        while q:
+            curr = q.popleft()
+            
+            if curr in visited:
+                continue
+            
+            count += 1
+            
+            dfs(curr)
         
         return count
