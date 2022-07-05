@@ -8,27 +8,31 @@ class Node:
 
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
+        
+        if not node:
+            return node
+        
         graph = {}
         visited = set()
         
-        if not node:
-            return None
+        q = deque()
         
-        def dfs(node):
-            if node in visited:
-                return
-            visited.add(node)
-            graph[node] = Node(node.val)
-            for neighbor in node.neighbors:
-                dfs(neighbor)
+        q.append(node)
         
-        dfs(node)
-        
-        for val in graph:
-            new_node = graph[val]
+        while q:
+            curr = q.popleft()
             
-            for neighbor in val.neighbors:
-                new_node.neighbors.append(graph[neighbor])
+            visited.add(curr.val)
+            
+            graph[curr] = Node(curr.val)
+            
+            for nei in curr.neighbors:
+                if nei.val not in visited:
+                    q.append(nei)
+            
+        for vertex in graph:
+            for nei in vertex.neighbors:
+                graph[vertex].neighbors.append(graph[nei])
         
         return graph[node]
-            
+        
