@@ -1,35 +1,35 @@
-from collections import defaultdict
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        graph = defaultdict(list)
-        incoming = defaultdict(int)
         
-        for prereq in prerequisites:
-            graph[prereq[1]].append(prereq[0])
-            incoming[prereq[0]] += 1
+        graph = defaultdict(list)
+        in_degree = defaultdict(int)
+        
+        for src, dst in prerequisites:
+            graph[src].append(dst)
+            in_degree[dst] += 1
         
         q = deque()
         
         for i in range(numCourses):
-            if incoming[i] == 0:
+            if in_degree[i] == 0:
                 q.append(i)
-
-        ret = []
+        
+        count = 0
         
         while q:
             curr = q.popleft()
-            ret.append(curr)
             
-            for neigh in graph[curr]:
-                incoming[neigh] -= 1
-                if incoming[neigh] == 0:
-                    q.append(neigh)
-        
-
-        return len(ret) == numCourses
+            count += 1
             
+            in_degree[curr] -= 1
+            
+            for neighbor in graph[curr]:
+                in_degree[neighbor] -= 1
+                if in_degree[neighbor] == 0:
+                    q.append(neighbor)
+        
+        return count == numCourses
+        
             
         
-        
-        
-        
+            
