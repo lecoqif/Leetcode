@@ -1,30 +1,33 @@
-from collections import defaultdict, deque
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        graph = defaultdict(list)
-        
-        for src, dst in edges:
-            graph[src].append(dst)
-            graph[dst].append(src)
         
         seen = set()
         
-        q = deque()
+        graph = defaultdict(list)
         
-        q.append((0, -1))
+        for src, dest in edges:
+            graph[src].append(dest)
+            graph[dest].append(src)
+        
+        
+        q = deque()
+        q.append((-1, 0))
         
         while q:
-            curr, parent = q.popleft()
+            parent, curr = q.popleft()
+            
+            if curr in seen:
+                return False
+            
             seen.add(curr)
             
             for nei in graph[curr]:
                 if nei != parent:
-                    if nei in seen:
-                        return False
-                    
-                    q.append((nei, curr))
+                    q.append((curr, nei))
+        
+        print(seen)
         
         return len(seen) == n
                 
-        
-        
+            
+            
