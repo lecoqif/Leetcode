@@ -25,8 +25,6 @@ class Solution:
                 if nei != parent:
                     q.append((curr, nei))
         
-        print(seen)
-        
         return len(seen) == n
                 
             
