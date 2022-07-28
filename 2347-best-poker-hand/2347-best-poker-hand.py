@@ -1,8 +1,8 @@
 class Solution:
     def bestHand(self, ranks: List[int], suits: List[str]) -> str:
-        flush = all(suits[i] == suits[0] for i in range(5))
+        is_flush = all(suits[i] == suits[0] for i in range(5))
         
-        if flush: return "Flush"
+        if is_flush: return "Flush"
         
         counter = Counter(ranks)
         
