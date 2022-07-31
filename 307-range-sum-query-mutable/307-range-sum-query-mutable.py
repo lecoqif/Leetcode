@@ -1,5 +1,5 @@
 class NumArray:
-
+    # Don't completely understand this yet
     def __init__(self, nums: List[int]):
         self.l = len(nums)
         self.seg_tree = [0] * self.l + nums
