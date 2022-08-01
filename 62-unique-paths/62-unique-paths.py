@@ -1,16 +1,28 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
-        dp = [[0] * n for _ in range(m)]
         
-        for i in range(n):
-            dp[0][i] = 1
+        if m == 0 or n == 0:
+            return 0
+        
+        ans = 0
+        
+        dp = [[0 for _ in range(n)] for i in range(m)]
+        
+        dp[0][0] = 1
+        
+        def grid_val(row: int, col: int) -> int:
+            if not (0 <= row < m and 0 <= col < n):
+                return 0
+            
+            return dp[row][col]
         
         for i in range(m):
-            dp[i][0] = 1
-        
-        for i in range(1, m):
-            for j in range(1, n):
-                dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
+            for j in range(n):
+
+                if i == 0 and j == 0: 
+                    continue
+                    
+                dp[i][j] = grid_val(i - 1, j) + grid_val(i, j - 1)
         
         return dp[m - 1][n - 1]
-        
+                
