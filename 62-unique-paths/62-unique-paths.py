@@ -1,6 +1,6 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
-        
+        # Fuck you Orest
         if m == 0 or n == 0: return 0
         
         ans = 0
