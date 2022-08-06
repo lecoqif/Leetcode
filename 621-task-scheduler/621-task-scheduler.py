@@ -9,8 +9,6 @@ class Solution:
         
         if n == 0 or maxf == 1: return len(tasks)
 
-        
-        
         heap = []
         
         for task, count in counter.items():
