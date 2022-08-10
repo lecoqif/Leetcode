@@ -7,13 +7,19 @@
 class Solution:
     def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
         
-        if len(nums) == 0: return None
         
-        mid = len(nums) // 2
         
-        root = TreeNode(nums[mid])
+        def helper(left, right) -> Optional[TreeNode]:
+            if left >= right: return None
+            
+            mid = left + (right - left) // 2
+            
+            root = TreeNode(nums[mid])
+            
+            root.left = helper(left, mid)
+            root.right = helper(mid + 1, right)
+            
+            return root
+            
         
-        root.left = self.sortedArrayToBST(nums[0:mid])
-        root.right = self.sortedArrayToBST(nums[mid + 1:])
-        
-        return root
+        return helper(0, len(nums))
