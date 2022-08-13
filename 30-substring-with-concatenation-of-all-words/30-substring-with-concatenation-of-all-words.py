@@ -26,8 +26,6 @@ class Solution:
                 if curr_word not in counter or curr_counter[curr_word] > counter[curr_word]:
                     check = False
                     break
-                
-                
             
             if check and curr_counter == counter: ret.append(i)
         
