@@ -16,15 +16,18 @@ class Solution:
             
             curr_counter = Counter()
             
+            check = True
+            
             for j in range(i, i + iter_start, word_len):
                 curr_word = s[j: j + word_len]
                 
                 if curr_word not in counter:
+                    check = False
                     break
                 
                 curr_counter[curr_word] += 1
             
-            if curr_counter == counter: ret.append(i)
+            if check and curr_counter == counter: ret.append(i)
         
         
         return ret
