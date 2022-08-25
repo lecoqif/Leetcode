@@ -1,13 +1,16 @@
 class Solution:
     def countElements(self, nums: List[int]) -> int:
         
-        nums.sort()
+        maxNum, minNum = float('-inf'), float('inf')
         
-        minNum, maxNum = nums[0], nums[-1]
+        for num in nums:
+            maxNum = max(maxNum, num)
+            minNum = min(minNum, num)
+        
         ret = 0
         
-        for num in nums[1:-1]:
-            if num > minNum and num < maxNum:
+        for num in nums:
+            if num < maxNum and num > minNum:
                 ret += 1
         
         return ret
