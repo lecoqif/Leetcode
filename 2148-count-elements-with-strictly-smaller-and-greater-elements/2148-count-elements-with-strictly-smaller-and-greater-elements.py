@@ -1,9 +1,7 @@
 class Solution:
     def countElements(self, nums: List[int]) -> int:
         
-        maxNum, minNum = max(nums), min(nums)
-        
-        ret = 0
+        maxNum, minNum, ret = max(nums), min(nums), 0
         
         for num in nums:
             if num < maxNum and num > minNum:
@@ -11,3 +9,7 @@ class Solution:
         
         return ret
                 
+        
+        
+        
+        
