@@ -1,14 +1,14 @@
 class Solution:
     def countElements(self, nums: List[int]) -> int:
         
-        counter = Counter(nums)
+        nums.sort()
         
-        elements = list(sorted(counter.keys()))
-        
+        minNum, maxNum = nums[0], nums[-1]
         ret = 0
         
-        for el in elements[1:-1]:
-            ret += counter[el]
+        for num in nums[1:-1]:
+            if num > minNum and num < maxNum:
+                ret += 1
         
         return ret
                 
